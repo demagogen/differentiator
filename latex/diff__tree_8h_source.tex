@@ -1,0 +1,82 @@
+\doxysection{diff\+\_\+tree.\+h}
+\hypertarget{diff__tree_8h_source}{}\label{diff__tree_8h_source}\index{include/diff\_tree.h@{include/diff\_tree.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DIFF\_TREE\_H\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DIFF\_TREE\_H\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}diff\_typedefs.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ TODO\ think\ about\ tree\_enum.h\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{enum}\ TREE\_ERROR}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ TREE\_NODE\_DED\_INSIDE\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ -\/2,\ }
+\DoxyCodeLine{00012\ \ \ \ \ TREE\_DED\_INSIDE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ -\/1,\ }
+\DoxyCodeLine{00013\ \ \ \ \ TREE\_NONE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ 0,\ }
+\DoxyCodeLine{00014\ \ \ \ \ TREE\_STRUCT\_ALLOCATION\_ERROR\ \ \ \ \ \ =\ \ 1,\ }
+\DoxyCodeLine{00015\ \ \ \ \ TREE\_NODE\_ALLOCATION\_ERROR\ \ \ \ \ \ \ \ =\ \ 2,\ }
+\DoxyCodeLine{00016\ \ \ \ \ TREE\_INVALID\_CAPACITY\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ 3,\ }
+\DoxyCodeLine{00017\ \ \ \ \ TREE\_OVERSIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ 4,\ }
+\DoxyCodeLine{00018\ \ \ \ \ TREE\_MISSING\_IP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ 5,\ }
+\DoxyCodeLine{00019\ \ \ \ \ TREE\_ROOT\_ALLOCATION\_ERROR\ \ \ \ \ \ \ \ =\ \ 6,\ }
+\DoxyCodeLine{00020\ \ \ \ \ TREE\_LEFT\_CHILD\_ALLOCATION\_ERROR\ \ =\ \ 7,\ }
+\DoxyCodeLine{00021\ \ \ \ \ TREE\_RIGHT\_CHILD\_ALLOCATION\_ERROR\ =\ \ 8,\ }
+\DoxyCodeLine{00022\ \ \ \ \ TREE\_PARENT\_ALLOCATION\_ERROR\ \ \ \ \ \ =\ \ 9,\ }
+\DoxyCodeLine{00023\ \ \ \ \ TREE\_NODE\_NOT\_LEAF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 11,\ }
+\DoxyCodeLine{00024\ \ \ \ \ TREE\_ERROR\_SIDE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 12,\ }
+\DoxyCodeLine{00025\ \ \ \ \ TREE\_NULL\_NODE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 13,\ }
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{enum}\ NODE\_RULE}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ RULE\_POISON\ =\ -\/1,\ }
+\DoxyCodeLine{00032\ \ \ \ \ ROOT\ \ \ \ \ \ \ \ =\ \ 0,\ }
+\DoxyCodeLine{00033\ \ \ \ \ RIGHT\ \ \ \ \ \ \ =\ \ 1,\ }
+\DoxyCodeLine{00034\ \ \ \ \ LEFT\ \ \ \ \ \ \ \ =\ \ 2,\ }
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{enum}\ NODE\_ELEMENT\_TYPE}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ TYPE\_POISON\ =\ -\/1,\ }
+\DoxyCodeLine{00041\ \ \ \ \ OBJECT\ \ \ \ \ \ =\ \ 1,\ }
+\DoxyCodeLine{00042\ \ \ \ \ OPERATION\ \ \ =\ \ 2,\ }
+\DoxyCodeLine{00043\ \ \ \ \ VARIABLE\ \ \ \ =\ \ 3,\ }
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{double}\ NodeData\_t;\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ StartTreeCapacity\ =\ 0;\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structNODE}{NODE}}}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ TREE\_RULE\ \ \ \ \ \ \ \ \ side;\ \ \ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{structNODE}{NODE}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structNODE_ab2bc2ff34ffd803bc791d97691a59670}{parent}};\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{structNODE}{NODE}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structNODE_a79a9fdf3352d7eeab59e13ee550ec744}{left}};\ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{structNODE}{NODE}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structNODE_a569656ce6663a21e6f00aa3de1128c90}{right}};\ \ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ NODE\_ELEMENT\_TYPE\ \mbox{\hyperlink{structNODE_ad80efb2793fc66b103fcd5ac04500a36}{type}};\ \ \ }
+\DoxyCodeLine{00061\ \ \ \ \ NodeData\_t\ \ \ \ \ \ \ \ \mbox{\hyperlink{structNODE_a1b8a012cc00e0f3c7cafd771885ccc16}{data}};\ \ \ }
+\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structTREE}{TREE}}}
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{structNODE}{NODE}}*\ \ \ \ \ \ root;\ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \mbox{\hyperlink{structTREE_ab6b490b2e8958fe65c855d072978587b}{capacity}};\ }
+\DoxyCodeLine{00069\ \ \ \ \ TREE\_ERROR\ \mbox{\hyperlink{structTREE_a6a351b42a86c3e6eb261cd05accb5b6b}{error}};\ \ \ \ }
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ TREE\_ERROR\ tree\_ctor(\mbox{\hyperlink{structTREE}{TREE}}*\ tree);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ TREE\_ERROR\ tree\_dtor(\mbox{\hyperlink{structTREE}{TREE}}*\ tree);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00089\ TREE\_ERROR\ tree\_add(\mbox{\hyperlink{structTREE}{TREE}}*\ tree,\ \mbox{\hyperlink{structNODE}{NODE}}*\ node,\ ADD\_RULE\ rule,\ TREE\_ELEMENT\_TYPE\ type,\ NodeData\_t\ data);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00095\ TREE\_ERROR\ tree\_delete\ (\mbox{\hyperlink{structTREE}{TREE}}*\ tree,\ \mbox{\hyperlink{structNODE}{NODE}}*\ node);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ TREE\_ERROR\ tree\_dump\ \ \ (FILE*\ file,\ \mbox{\hyperlink{structTREE}{TREE}}*\ tree);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

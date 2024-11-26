@@ -1,0 +1,13 @@
+digraph {bgcolor="#696969" rankdir = TB
+Info[shape=Mrecord,     style=filled,           fillcolor="grey",     label="capacity: 3", fontcolor = "black",  fontsize = 14];
+
+     node0[shape=Mrecord, style=filled,         fillcolor="firebrick1",     label="              {address: 0x5ce6bfdee2b0          | type:   0          | parent: (nil)          | left:   0x5ce6bfdee330          | right:  0x5ce6bfdee2f0          | data: 59.000000}"];  
+
+ node0->node1        [color = "grey"];
+ node1[shape=Mrecord, style=filled,         fillcolor="grey",     label="              {address: 0x5ce6bfdee330          | type:   2          | parent: 0x5ce6bfdee2b0          | left:   (nil)          | right:  (nil)          | data: x}"];   
+
+ node0->node2        [color = "grey"];
+ node2[shape=Mrecord, style=filled,         fillcolor="deepskyblue",     label="              {address: 0x5ce6bfdee2f0          | type:   1          | parent: 0x5ce6bfdee2b0          | left:   (nil)          | right:  (nil)          | data: ADD}"];   
+
+ 
+}
