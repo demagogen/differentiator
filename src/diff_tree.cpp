@@ -1,5 +1,6 @@
 #include "diff_tree.h"
 #include "diff_tree_utils.h"
+#include "../lib/kalatushkin/text_data.h"
 
 TREE_ERROR tree_ctor(TREE* tree)
 {
@@ -27,63 +28,48 @@ TREE_ERROR tree_dtor(TREE* tree)
     return tree->error;
 }
 
-NODE* tree_node_ctor(NodeData_t data)
+NODE* new_node(NODE_ELEMENT_TYPE type, NodeData_t data, NODE* left, NODE* right)
 {
     NODE* newNode = (NODE* ) calloc(1, sizeof(NODE));
 
     newNode->data     = data;
 
     newNode->parent   = NULL;
-    newNode->left     = NULL;
-    newNode->right    = NULL;
+
+    if (right)
+    {
+        right->parent = newNode;
+    }
+    if (left)
+    {
+        left->parent = newNode;
+    }
+
+    newNode->left  = left;
+    newNode->right = right;
+
+    newNode->type = type;
 
     return newNode;
 }
 
-TREE_ERROR tree_add(TREE* tree, NODE* parentNode, NODE_RULE add_rule, NODE_ELEMENT_TYPE node_type, NodeData_t data)
+
+TREE_ERROR tree_node_dtor(NODE* node)
 {
-    assert(tree);
+    assert(node);
 
-    switch(add_rule)
+    if (!node)
     {
-        case(RIGHT):
-        {
-            parentNode->right         = tree_node_ctor(data);
-            parentNode->right->parent = parentNode;
-            parentNode->right->side   = RIGHT;
-            parentNode->right->type   = node_type;
-            break;
-        }
-
-        case(LEFT):
-        {
-            parentNode->left         = tree_node_ctor(data);
-            parentNode->left->parent = parentNode;
-            parentNode->left->side   = LEFT;
-            parentNode->left->type   = node_type;
-            break;
-        }
-
-        case(ROOT):
-        {
-            tree->root       = (NODE* ) calloc(1, sizeof(NODE));
-            tree->root->data = data;
-            tree->root->side = ROOT;
-            tree->root->type = node_type;
-            break;
-        }
-
-        default:
-        {
-            return TREE_ERROR_SIDE;
-        }
+        return TREE_NODE_ALLOCATION_ERROR;
     }
 
-    tree->capacity++;
+    node->right   = NULL;
+    node->left    = NULL;
+    node->parent  = NULL;
+    node->data    = TREE_POISON;
 
-    return tree->error;
+    return TREE_NONE;
 }
-
 
 void tree_graphic_dump(TREE* tree)
 {
@@ -189,7 +175,7 @@ void node_print_node (FILE* dotfile, size_t* index, NODE* node)
         case(OPERATION):
         {
             OPERATIONS operation_enum = (OPERATIONS) node->data;
-            fprintf(dotfile, "| data: %s}\"];   \n\n ", return_operations_enum_name_string(operation_enum));
+            fprintf(dotfile, "| data: %s}\"];   \n\n ", return_operation_enum(operation_enum));
             break;
         }
         case(VARIABLE ):

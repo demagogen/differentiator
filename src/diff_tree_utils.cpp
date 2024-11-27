@@ -58,17 +58,55 @@ const char* return_node_element_type_enum_name_string(NODE_ELEMENT_TYPE enum_par
     }
 }
 
-const char* return_operations_enum_name_string(OPERATIONS enum_param)
+const char* return_operation_enum(OPERATIONS enum_param)
 {
     switch(enum_param)
     {
-        DESCRIPTION_ ( ADD );
-        DESCRIPTION_ ( SUB );
-        DESCRIPTION_ ( MUL );
-        DESCRIPTION_ ( DIV );
-        DESCRIPTION_ ( POW );
+        case ( ADD    ): return "+";      break;
+        case ( SUB    ): return "-";      break;
+        case ( MUL    ): return "*";      break;
+        case ( DIV    ): return "/";      break;
+        case ( POW    ): return "^";      break;
+        case ( COS    ): return "cos";    break;
+        case ( SIN    ): return "sin";    break;
+        case ( TG     ): return "tg";     break;
+        case ( CTG    ): return "ctg";    break;
+        case ( SH     ): return "sh";     break;
+        case ( CH     ): return "ch";     break;
+        case ( TH     ): return "th";     break;
+        case ( CTH    ): return "cth";    break;
+        case ( ARCCOS ): return "arccos"; break;
+        case ( ARCSIN ): return "arcsin"; break;
+        case ( ARCTG  ): return "arctg";  break;
+        case ( ARCCTG ): return "arcctg"; break;
+        case ( ARCSH  ): return "arcsh";  break;
+        case ( ARCCH  ): return "arcch";  break;
+        case ( ARCTH  ): return "arcth";  break;
+        case ( ARCCTH ): return "arccth"; break;
+        case ( LOG    ): return "log";    break;
+        case ( LN     ): return "ln";     break;
 
         default:
             return "error print error";
     }
+}
+
+int read_line(char** line, char** base_ip)
+{
+    if (!base_ip)
+    {
+        return -1;
+    }
+
+    *line = *base_ip;
+    size_t offset = 0;
+    while (*(*base_ip + 1) != '{' && *(*base_ip + 1) != '}')
+    {
+        (*line)[offset] = **base_ip;
+        (*base_ip)++;
+        offset++;
+    }
+    *(*line + offset) = '\0';
+
+    return 0;
 }

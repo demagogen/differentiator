@@ -25,6 +25,13 @@ const char* return_node_element_type_enum_name_string(NODE_ELEMENT_TYPE enum_par
 /// @param required OPERATIONS enum
 /// @return OPERATIONS enum name string
 
-const char* return_operations_enum_name_string(OPERATIONS enum_param);
+const char* return_operation_enum(OPERATIONS enum_param);
+
+/// @brief function for read line from buffer
+/// @param line, which will be filled
+/// @param pointer on line start in buffer
+/// @return int error code
+
+int read_line(char** line, char** base_ip);
 
 #endif

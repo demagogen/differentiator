@@ -52,11 +52,29 @@ enum NODE_ELEMENT_TYPE
 
 enum OPERATIONS
 {
-    ADD = 1, ///  <add two numbers in nodes
-    SUB = 2, ///  <subtract right node number from left node number
-    MUL = 3, ///  <multiply two numbers in nodes
-    DIV = 4, ///  <divide left node number on right node number
-    POW = 5, ///  <raise left node number to a power of right node number
+    ADD    =  1, /// <add two numbers in nodes
+    SUB    =  2, /// <subtract right node number from left node number
+    MUL    =  3, /// <multiply two numbers in nodes
+    DIV    =  4, /// <divide left node number on right node number
+    POW    =  5, /// <raise left node number to a power of right node number
+    COS    =  6, /// <cos of left node value
+    SIN    =  7, /// <sin of left node value
+    TG     =  8, /// <tg of left node value
+    CTG    =  9, /// <ctg of left node value
+    SH     = 10, /// <sh of left node value
+    CH     = 11, /// <ch of left node value
+    TH     = 12, /// <th of left node value
+    CTH    = 13, /// <cth of left node value
+    ARCCOS = 14, /// <arccos of left node value
+    ARCSIN = 15, /// <arcsin of left node value
+    ARCTG  = 16, /// <arctg of left node value
+    ARCCTG = 17, /// <arcctg of left node value
+    ARCSH  = 18, /// <arcsh of left node value
+    ARCCH  = 19, /// <arcch of left node value
+    ARCTH  = 20, /// <arcth of left node value
+    ARCCTH = 21, /// <arccth of left node value
+    LOG    = 22, /// <log with base of right value and argument in left node value
+    LN     = 23, /// <ln with argument in left node value
 };
 
 typedef double NodeData_t; /// <node data type typedef
@@ -100,22 +118,20 @@ TREE_ERROR tree_ctor(TREE* tree);
 
 TREE_ERROR tree_dtor(TREE* tree);
 
-/// @brief add new node in tree
-/// @param pointer on structure with information about tree
-/// @param pointer on structure with information about node
-/// @param enum with rule, which explain where we will add new node
-/// @param enum with information about tree data type
-/// @param data, which we will put in new node
+/// @brief create new node in tree, which get right and left subnodes
+/// @param new node data type
+/// @param new node data
+/// @param new node left node
+/// @param new node right node
+/// @return pointer on new node
+
+NODE* new_node(NODE_ELEMENT_TYPE type, NodeData_t data, NODE* left, NODE* right);
+
+/// @brief delete node by pointer
+/// @param pointer on required node
 /// @return tree error code
 
-TREE_ERROR tree_add(TREE* tree, NODE* node, NODE_RULE rule, NODE_ELEMENT_TYPE node_type, NodeData_t data);
-
-/// @brief delete node in tree
-/// @param pointer on tree structure
-/// @param pointer on node structure
-/// @return tree error code
-
-TREE_ERROR tree_delete(TREE* tree, NODE* node);
+TREE_ERROR tree_node_dtor(NODE* node);
 
 /// @brief make dotfile with tree graph
 /// @param pointer on tree structure

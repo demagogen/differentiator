@@ -2,3 +2,6 @@ build
 doxyfile
 html
 images
+todoshnik.txt
+latex
+.vscode

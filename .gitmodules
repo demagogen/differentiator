@@ -1,0 +1,3 @@
+[submodule "kalatushkin"]
+	path = kalatushkin
+	url = https://github.com/demagogen/kalatushkin.git
