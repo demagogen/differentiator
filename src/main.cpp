@@ -1,12 +1,4 @@
-#include "diff_typedefs.h"
 #include "diff_tree.h"
-
-#define ADD_(node1, node2) new_node(OPERATION, ADD, node1, node2)
-#define SUB_(node1, node2) new_node(OPERATION, SUB, node1, node2)
-#define MUL_(node1, node2) new_node(OPERATION, MUL, node1, node2)
-#define DIV_(node1, node2) new_node(OPERATION, DIV, node1, node2)
-#define NUM_(value)        new_node(OBJECT,    value, NULL, NULL)
-#define X_                 new_node(VARIABLE,  0,     NULL, NULL)
 
 int main()
 {
@@ -15,11 +7,7 @@ int main()
 
     // tree.root = new_node(OPERATION, DIV, NULL, NULL);
 
-    // tree.root = new_node(OPERATION, DIV, (new_node(OPERATION, ADD, new_node(VARIABLE, 1, NULL, NULL),
-                        // new_node(OBJECT, 3, NULL, NULL)), new_node(OPERATION, SUB, new_node(OBJECT, 1000, NULL, NULL),
-                        // new_node(OBJECT, 7, NULL, NULL))));
-
-    tree.root = DIV_(ADD_(X_, NUM_(3)), SUB_(NUM_(1000), NUM_(7)));
+    tree.root = DIV_(ADD_(MUL_(NUM_(7), X_), NUM_(3)), SUB_(NUM_(1000), NUM_(7)));
 
     tree_graphic_dump(&tree);
 
@@ -46,43 +34,6 @@ int main()
     copy(subtree)
 */
 
-/*
-#define DIV_(node1, node2)    \
-    NODE newNode = NULL;      \
-    new_node(newNode);  \
-    newNode->operation = DIV; \
-    newNode->left  = node1;   \
-    newNode->right = node2;   \
-
-#define ADD_(node1, node2)    \
-    NODE newNode = NULL;      \
-    new_node(newNode);  \
-    newNode->operation = ADD; \
-    newNode->left  = node1    \
-    newNode->right = node2    \
-
-#define SUB_(node1, node2)    \
-    NODE newNode = NULL;      \
-    new_node(newNode);  \
-    newNode->operation = SUB; \
-    newNode->left  = node1;   \
-    newNode->right = node2;   \
-
-#define MUL_(node1, node2)    \
-    NODE newNode = NULL;      \
-    new_node(newNode);  \
-    newNode->operation = MUL; \
-    newNode->left  = node1    \
-    newNode->right = node2    \
-
-#define NUM_(value)      \
-    NODE node = NULL;    \
-    new_node(node) \
-*/
-
-/*
-    tree.root = new_node(OPERATION, DIV, new_node(OPERATION, ADD, new_node(VARIABLE, 1, NULL, NULL),
-                                         new_node(OBJECT, 3, NULL, NULL)),
-                                         new_node(OPERATION, SUB, new_node(OBJECT, 1000, NULL, NULL),
-                                         new_node(OBJECT, 7, NULL, NULL)));
-*/
+    // tree.root = new_node(OPERATION, DIV, (new_node(OPERATION, ADD, new_node(VARIABLE, 1, NULL, NULL),
+                        // new_node(OBJECT, 3, NULL, NULL)), new_node(OPERATION, SUB, new_node(OBJECT, 1000, NULL, NULL),
+                        // new_node(OBJECT, 7, NULL, NULL))));

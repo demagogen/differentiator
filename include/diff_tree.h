@@ -1,7 +1,13 @@
 #ifndef DIFF_TREE_H_
 #define DIFF_TREE_H_
 
-#include "diff_typedefs.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <assert.h>
+#include <string.h>
+
+#include "diff.h"
 
 /* TODO think about tree_enum.h */
 
