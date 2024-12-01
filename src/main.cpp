@@ -9,6 +9,19 @@ int main()
 
     tree.root = DIV_(ADD_(MUL_(NUM_(7), X_), NUM_(3)), SUB_(NUM_(1000), NUM_(7)));
 
+    // prefix_print(stdout, tree.root);
+    // printf("\n\n");
+    // infix_print(stdout, tree.root);
+    // printf("\n\n");
+    // bad_tex_print(stdout, tree.root);
+    // printf("\n\n");
+
+    // tree.root = get_g();
+    // NodeData_t result = tree.root->data;
+
+
+    tree.root = get_g();
+
     tree_graphic_dump(&tree);
 
     return 0;
@@ -22,7 +35,7 @@ int main()
         root = DIV_(ADD_(X_, NUM_(3)), SUB_(NUM_(1000), NUM_(7)));
 
     prefix
-        (/(+(X)(3))(-(1000)(7)))
+        (/(+(x)(3))(-(1000)(7)))
 
     infix
         (((x) + (3)) / ((1000) - (7)))

@@ -133,6 +133,37 @@ TREE_ERROR tree_dtor(TREE* tree);
 
 NODE* new_node(NODE_ELEMENT_TYPE type, NodeData_t data, NODE* left, NODE* right);
 
+/// @brief recursive print tree in prefix format in file
+/// @param file pointer for output
+/// @param pointer on node structure
+/// @return error code
+
+TREE_ERROR prefix_print(FILE* file, NODE* node);
+
+/// @brief recursive print tree in easy infix format in file
+/// @param file pointer for output
+/// @param pointer on node structure
+/// @return error code
+
+TREE_ERROR infix_print(FILE* file, NODE* node);
+
+/// @brief recursive print tree in bad TeX format (skip \frac {}{})
+/// @param file for output
+/// @param pointer on node structure
+
+TREE_ERROR bad_tex_print(FILE* file, NODE* node);
+
+//___________________________________________________RECURSIVE COUNTER______________________________________________________
+
+NODE* get_n();
+NODE* get_p();
+NODE* get_g();
+NODE* get_e();
+NODE* get_t();
+NODE* syntax_error();
+
+//___________________________________________________TREE DUMP FUNCTIONS____________________________________________________
+
 /// @brief delete node by pointer
 /// @param pointer on required node
 /// @return tree error code

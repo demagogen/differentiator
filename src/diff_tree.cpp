@@ -71,6 +71,237 @@ TREE_ERROR tree_node_dtor(NODE* node)
     return TREE_NONE;
 }
 
+// need (((x)+(3))/((1000)-(7)))
+
+// TODO debug variation with .2 in fprintf
+#define PRINT_DATA_BY_TYPE(type, data)                    \
+    if (type == OPERATION)                                \
+    {                                                     \
+        fprintf(file, "%s", return_operation_enum(data)); \
+    }                                                     \
+    else if (type == VARIABLE)                            \
+    {                                                     \
+        fprintf(file, "x");                               \
+    }                                                     \
+    else if (type == OBJECT)                              \
+    {                                                     \
+        fprintf(file, "%.0lf", data);                     \
+    }                                                     \
+    else                                                  \
+    {                                                     \
+        return TREE_NODE_TYPE_ERROR;                      \
+    }                                                     \
+
+TREE_ERROR prefix_print(FILE* file, NODE* node)
+{
+    assert(file);
+
+    if (!node)
+    {
+        return TREE_NODE_ALLOCATION_ERROR;
+    }
+
+    fprintf(file, "(");
+
+    PRINT_DATA_BY_TYPE(node->type, node->data);
+
+    if (node->left)
+    {
+        prefix_print(file, node->left);
+    }
+    if (node->right)
+    {
+        prefix_print(file, node->right);
+    }
+
+    fprintf(file, ")");
+
+    return TREE_NONE;
+}
+
+TREE_ERROR infix_print(FILE* file, NODE* node)
+{
+    assert(file);
+
+    if (!node)
+    {
+        return TREE_NODE_ALLOCATION_ERROR;
+    }
+
+    fprintf(file, "(");
+
+    if (node->left)
+    {
+        infix_print(file, node->left);
+    }
+
+    PRINT_DATA_BY_TYPE(node->type, node->data);
+
+    if (node->right)
+    {
+        infix_print(file, node->right);
+    }
+
+    fprintf(file, ")");
+
+    return TREE_NONE;
+}
+
+TREE_ERROR bad_tex_print(FILE* file, NODE* node)
+{
+    assert(file);
+
+    if (!node)
+    {
+        return TREE_NODE_ALLOCATION_ERROR;
+    }
+
+    static size_t div_brackets_counter = 0;
+
+/*
+Here I think about how to make TeX like formula format
+*/
+
+    if (node->parent)
+    {
+        if (node->parent->type == OPERATION && (OPERATIONS) node->parent->data == DIV)
+        {
+            if (div_brackets_counter % 2 == 0)
+            {
+                fprintf(file, "(");
+            }
+            else if (div_brackets_counter % 2 == 1)
+            {
+                fprintf(file, ")");
+            }
+
+            div_brackets_counter++;
+        }
+    }
+
+    if (node->left)
+    {
+        bad_tex_print(file, node->left);
+    }
+
+    PRINT_DATA_BY_TYPE(node->type, node->data);
+
+    if (node->right)
+    {
+        bad_tex_print(file, node->right);
+    }
+
+    return TREE_NONE;
+}
+
+const char* s = "24*2+30*4+(23-21)*1000$";
+int         p = 0;
+
+NODE* get_g()
+{
+    NODE* val = get_e();
+
+    if (s[p] != '$')
+    {
+        syntax_error();
+    }
+
+    return val;
+}
+
+NODE* get_n()
+{
+    int val = 0;
+
+    int old_p = p;
+    while ('0' <= s[p] && s[p] <= '9')
+    {
+        val = val * 10 + s[p] - '0';
+        p++;
+    }
+
+    if (old_p != p)
+    {
+        syntax_error();
+    }
+
+    return NUM_(val);
+}
+
+NODE* get_e()
+{
+    NODE* val = get_t();
+
+    while (s[p] == '+' || s[p] == '-')
+    {
+        int op = s[p];
+        p++;
+        NODE* val2 = get_t();
+
+        if (op == '+')
+        {
+            val->data += val2->data;
+        }
+        else
+        {
+            val->data -= val2->data;
+        }
+    }
+
+    return val;
+}
+
+NODE* get_t()
+{
+    NODE* val = get_p();
+
+    while (s[p] == '*' || s[p] == '/')
+    {
+        int op = s[p];
+        p++;
+        NODE* val2 = get_p();
+
+        if (op == '*')
+        {
+            val->data *= val2->data;
+        }
+        else
+        {
+            val->data /= val2->data;
+        }
+    }
+
+    return val;
+}
+
+NODE* get_p()
+{
+    if (s[p] == '(')
+    {
+        p++;
+        NODE* val = get_e();
+
+        if (s[p] != ')')
+        {
+            syntax_error();
+        }
+        p++;
+
+        return val;
+    }
+    else
+    {
+        return get_n();
+    }
+
+    return syntax_error();
+}
+
+NODE* syntax_error()
+{
+    return NULL;
+}
+
 void tree_graphic_dump(TREE* tree)
 {
     assert(tree);
@@ -79,12 +310,12 @@ void tree_graphic_dump(TREE* tree)
 
     fprintf(dotfile, "digraph {bgcolor=\"#696969\" rankdir = TB\n");
 
-    fprintf(dotfile, "Info[shape=Mrecord,     "
-                     "style=filled,           "
-                     "fillcolor=\"grey\",     "
+    fprintf(dotfile, "Info[shape=Mrecord, "
+                     "style=filled, "
+                     "fillcolor=\"grey\", "
                      "label=\"capacity: %d\", "
-                     "fontcolor = \"black\",  "
-                     "fontsize = 14];\n\n     ",
+                     "fontcolor = \"black\", "
+                     "fontsize = 14];\n\n ",
                       tree->capacity);
 
     size_t index = 0;
@@ -145,18 +376,21 @@ void node_print_node (FILE* dotfile, size_t* index, NODE* node)
             break;
         }
 
-        default: { return; }
+        default:
+        {
+            return;
+        }
     }
 
     fprintf(dotfile, "node%d[shape=Mrecord, "
-                     "style=filled,         "
-                     "fillcolor=\"%s\",     "
-                     "label=\"              "
-                     "{address: %p          "
-                     "| type:   %d          "
-                     "| parent: %p          "
-                     "| left:   %p          "
-                     "| right:  %p          ",
+                     "style=filled, "
+                     "fillcolor=\"%s\", "
+                     "label=\" "
+                     "{address: %p "
+                     "| type:   %d "
+                     "| parent: %p "
+                     "| left:   %p "
+                     "| right:  %p ",
                      *index,
                      node_color,
                      node,
@@ -169,18 +403,17 @@ void node_print_node (FILE* dotfile, size_t* index, NODE* node)
     {
         case(OBJECT   ):
         {
-            fprintf(dotfile, "| data: %lf}\"];  \n\n ", node->data);
+            fprintf(dotfile, "| data: %lf}\"];\n\n", node->data);
             break;
         }
         case(OPERATION):
         {
-            OPERATIONS operation_enum = (OPERATIONS) node->data;
-            fprintf(dotfile, "| data: %s}\"];   \n\n ", return_operation_enum(operation_enum));
+            fprintf(dotfile, "| data: %s}\"];\n\n", return_operation_enum(node->data));
             break;
         }
         case(VARIABLE ):
         {
-            fprintf(dotfile, "| data: %s}\"];   \n\n ", "x");
+            fprintf(dotfile, "| data: %s}\"];\n\n", "x");
             break;
         }
 
@@ -193,7 +426,7 @@ void node_print_edge(FILE* dotfile, size_t first_node_index, size_t second_node_
     assert(dotfile);
     assert(node);
 
-    fprintf(dotfile, "node%d->node%d        "
+    fprintf(dotfile, "node%d->node%d "
                      "[color = \"grey\"];\n ",
                       first_node_index,
                       second_node_index);

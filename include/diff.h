@@ -9,7 +9,7 @@
 #define DIV_(node1, node2)  new_node ( OPERATION, DIV,    node1, node2 )
 #define SIN_(node1       )  new_node ( OPERATION, SIN,    node1, NULL  )
 #define COS_(node1       )  new_node ( OPERATION, COS,    node1, NULL  )
-#define TG_ (node1       )  new_node ( OPERATION, TG,     node1, NULL  )
+#define TG_(node1        )  new_node ( OPERATION, TG,     node1, NULL  )
 #define CTG_(node1       )  new_node ( OPERATION, CTG,    node1, NULL  )
 #define ARCSIN(node1     )  new_node ( OPERATION, ARCSIN, node1, NULL  )
 #define ARCCOS(node1     )  new_node ( OPERATION, ARCCOS, node1, NULL  )

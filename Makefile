@@ -6,7 +6,7 @@ OBJECTS_DIR = build
 OUTFILE 	= differentiator
 
 # Source files
-SOURCES = main.cpp diff_tree.cpp diff_tree_utils.cpp
+SOURCES = main.cpp diff_tree.cpp diff_tree_utils.cpp diff.cpp compare_tex.cpp
 
 # Submodule object files
 SUBMODULE_OBJECT_FILES =

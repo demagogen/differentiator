@@ -7,6 +7,8 @@
         "array": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "chrono": "cpp",
+        "functional": "cpp"
     }
 }
