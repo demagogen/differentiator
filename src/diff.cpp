@@ -68,7 +68,7 @@ void optimization(TREE* tree)
 
         recursive_constant_propagation(tree->root, &indicator);
 
-        // recursive_remove_trivials(tree->root, &indicator);
+        recursive_remove_trivials(tree->root, &indicator);
 
         if (indicator)
         {
@@ -84,6 +84,7 @@ void optimization(TREE* tree)
     node->type = OBJECT;  \
     node->data = value;
 
+// TODO make define later
 void recursive_constant_propagation(NODE* node, bool* indicator)
 {
     if (!node || !node->left || !node->right)
@@ -91,37 +92,34 @@ void recursive_constant_propagation(NODE* node, bool* indicator)
         return;
     }
 
-    if (node->type == OPERATION)
+    if (node->type == OPERATION     &&
+        node->right->type == OBJECT &&
+        node->left->type  == OBJECT)
     {
-        if (check_div_numerator_is_zero(node))
-        {printf("rcp 1\n");
-            node = div_numerator_is_zero(node);
-            *indicator = false;
+        NodeData_t left_value  = node->left->data;
+        NodeData_t right_value = node->right->data;
+
+        switch (return_operation_code(node))
+        {
+            case (ADD):
+                CUT_CHILDS(left_value + right_value);
+                *indicator = false;
+                break;
+
+
+            case (MUL):
+                CUT_CHILDS(left_value * right_value);
+                *indicator = false;
+                break;
+
+            case (DIV):
+                CUT_CHILDS(left_value / right_value);
+                *indicator = false;
+                break;
+
+            default:
+                break;
         }
-        if (check_div_denominator_is_one(node))
-        {printf("rcp 2\n");
-            node = div_denominator_is_one(node);
-            *indicator = false;
-        }
-        if (check_mul_factor_is_zero(node))
-        {printf("rcp 3\n");
-            node = mul_factor_is_zero(node);
-            *indicator = false;
-        }
-        if (check_mul_factor_is_one(node))
-        {printf("rcp 4\n");
-            node = mul_factor_is_one(node);
-            *indicator = false;
-        }
-        if (check_add_term_is_zero(node))
-        {printf("rcp 5\n");
-            node = add_term_is_zero(node);
-            *indicator = false;
-        }
-        // if (check_two_neighboring_objects(node))
-        // {
-//
-        // }
     }
 
     if (node->right)
@@ -143,129 +141,7 @@ void recursive_constant_propagation(NODE* node, bool* indicator)
 //!                                                CONSTANTS PROPAGATION
 //-----------------------------------------------------------------------------------------------------------------------------
 
-//TODO сделать так, чтобы это была свертка констант, а не лобого выражения.
-#define CHECK_DIV_PARAMS(node, value)              \
-    return_operation_code(node) == DIV          && \
-    node->type == OBJECT                        && \
-    compare_values(node->data, value) == EQUAL;    \
-
-bool check_div_numerator_is_zero(NODE* node)
-{
-    return CHECK_DIV_PARAMS(node->left, 0);
-}
-
-bool check_div_denominator_is_one(NODE* node)
-{
-    return CHECK_DIV_PARAMS(node->right, 1);
-}
-
-#define CHECK_MUL_PARAMS(value)                                                              \
-    return_operation_code(node) == MUL                                                    && \
-    ((node->right->type == OBJECT && compare_values(node->right->data, value) == EQUAL)   || \
-     (node->left->type  == OBJECT && compare_values(node->left->data,  value) == EQUAL));    \
-
-bool check_mul_factor_is_zero(NODE* node)
-{
-    return CHECK_MUL_PARAMS(0);
-}
-
-bool check_mul_factor_is_one(NODE* node)
-{
-    return CHECK_MUL_PARAMS(1);
-}
-
-bool check_add_term_is_zero(NODE* node)
-{
-    return return_operation_code(node) == ADD            &&
-         ((node->left->type  == OBJECT                   &&
-           compare_values(node->left->data,  0) == EQUAL &&
-           node->right->type == OBJECT)                  ||
-          (node->right->type == OBJECT                   &&
-           compare_values(node->right->data, 0) == EQUAL &&
-           node->left->type == OBJECT));
-}
-
-bool check_two_neighboring_objects(NODE* node)
-{
-    return node->type == OPERATION && node->right->type == OBJECT && node->left->type == OBJECT;
-}
-
-NODE* div_numerator_is_zero(NODE* node)
-{
-    CUT_CHILDS(0);
-
-    return node;
-}
-
-NODE* div_denominator_is_one(NODE* node)
-{
-    NodeData_t value = node->left->data;
-
-    CUT_CHILDS(value);
-
-    return node;
-}
-
-NODE* mul_factor_is_zero(NODE* node)
-{
-    CUT_CHILDS(0);
-
-    return node;
-}
-
-NODE* mul_factor_is_one(NODE* node)
-{
-    NodeData_t value = 0;
-
-    if (node->left->data != 1)
-    {
-        value = node->left->data;
-    }
-    else
-    {
-        value = node->right->data;
-    }
-
-    CUT_CHILDS(value);
-
-    return node;
-}
-
-NODE* add_term_is_zero(NODE* node)
-{
-    NodeData_t value = 0;
-
-    if (node->left->data != 0)
-    {
-        value = node->left->data;
-    }
-    else
-    {
-        value = node->right->data;
-    }
-
-    CUT_CHILDS(value);
-
-    return node;
-}
-
-NODE* add_two_terms(NODE* node)
-{
-    NodeData_t value = node->left->data + node->right->data;
-
-    CUT_CHILDS(value);
-
-    return node;
-}
-
-NODE* mul_two_factors(NODE* node)
-{
-    NodeData_t value = node->left->data * node->right->data;
-
-    CUT_CHILDS(value);
-
-    return node;
-}
+//TODO сделать так, чтобы это была свертка констант, а не любого выражения.
 
 //-----------------------------------------------------------------------------------------------------------------------------
 //!                                                  REMOVE TRIVIALS
@@ -278,9 +154,11 @@ NODE* mul_two_factors(NODE* node)
         indicator false
 */
 
+// TODO make defines later
+
 void recursive_remove_trivials(NODE* node, bool* indicator)
 {
-    if (!node)
+    if (!node || !node->right || !node->left)
     {
         return;
     }
@@ -323,7 +201,7 @@ void recursive_remove_trivials(NODE* node, bool* indicator)
         threeNodeData.tmpNode_rule = RIGHT;
     }
     else
-    {printf("return in ==\n");
+    {
         return;
     }
 
@@ -349,8 +227,8 @@ void recursive_remove_trivials(NODE* node, bool* indicator)
     }
 
     if (threeNodeData.operation == MUL && compare_values(threeNodeData.object_value, 0) == EQUAL)
-    {printf("in null trivials\n");
-        node = NUM_(0);
+    {
+        CUT_CHILDS(0);
         *indicator = false;
     }
 

@@ -8,12 +8,12 @@ int main()
 
     // tree.root = new_node(OPERATION, DIV, NULL, NULL);
 
-    tree.root = DIV_(ADD_(MUL_(NUM_(7), X_), NUM_(3)), ADD_(NUM_(1000), NUM_(-7)));
+    tree.root = DIV_(ADD_(ADD_(X_, NUM_(20)), NUM_(3)), ADD_(NUM_(1000), NUM_(-7)));
 
     // prefix_print(stdout, tree.root);
     // printf("\n\n");
     // infix_print(stdout, tree.root);
-    // printf("\n\n");
+    // printf("\n\n");s
     // bad_tex_print(stdout, tree.root);
     // printf("\n\n");
 
