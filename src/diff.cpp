@@ -91,11 +91,37 @@ void recursive_constant_propagation(NODE* node, bool* indicator)
         return;
     }
 
-    if (node->type == OPERATION     &&
-        node->right->type == OBJECT &&
-        node->left->type  == OBJECT)
+    if (node->type == OPERATION)
     {
-
+        if (check_div_numerator_is_zero(node))
+        {printf("rcp 1\n");
+            node = div_numerator_is_zero(node);
+            *indicator = false;
+        }
+        if (check_div_denominator_is_one(node))
+        {printf("rcp 2\n");
+            node = div_denominator_is_one(node);
+            *indicator = false;
+        }
+        if (check_mul_factor_is_zero(node))
+        {printf("rcp 3\n");
+            node = mul_factor_is_zero(node);
+            *indicator = false;
+        }
+        if (check_mul_factor_is_one(node))
+        {printf("rcp 4\n");
+            node = mul_factor_is_one(node);
+            *indicator = false;
+        }
+        if (check_add_term_is_zero(node))
+        {printf("rcp 5\n");
+            node = add_term_is_zero(node);
+            *indicator = false;
+        }
+        // if (check_two_neighboring_objects(node))
+        // {
+//
+        // }
     }
 
     if (node->right)
@@ -131,6 +157,114 @@ bool check_div_numerator_is_zero(NODE* node)
 bool check_div_denominator_is_one(NODE* node)
 {
     return CHECK_DIV_PARAMS(node->right, 1);
+}
+
+#define CHECK_MUL_PARAMS(value)                                                              \
+    return_operation_code(node) == MUL                                                    && \
+    ((node->right->type == OBJECT && compare_values(node->right->data, value) == EQUAL)   || \
+     (node->left->type  == OBJECT && compare_values(node->left->data,  value) == EQUAL));    \
+
+bool check_mul_factor_is_zero(NODE* node)
+{
+    return CHECK_MUL_PARAMS(0);
+}
+
+bool check_mul_factor_is_one(NODE* node)
+{
+    return CHECK_MUL_PARAMS(1);
+}
+
+bool check_add_term_is_zero(NODE* node)
+{
+    return return_operation_code(node) == ADD            &&
+         ((node->left->type  == OBJECT                   &&
+           compare_values(node->left->data,  0) == EQUAL &&
+           node->right->type == OBJECT)                  ||
+          (node->right->type == OBJECT                   &&
+           compare_values(node->right->data, 0) == EQUAL &&
+           node->left->type == OBJECT));
+}
+
+bool check_two_neighboring_objects(NODE* node)
+{
+    return node->type == OPERATION && node->right->type == OBJECT && node->left->type == OBJECT;
+}
+
+NODE* div_numerator_is_zero(NODE* node)
+{
+    CUT_CHILDS(0);
+
+    return node;
+}
+
+NODE* div_denominator_is_one(NODE* node)
+{
+    NodeData_t value = node->left->data;
+
+    CUT_CHILDS(value);
+
+    return node;
+}
+
+NODE* mul_factor_is_zero(NODE* node)
+{
+    CUT_CHILDS(0);
+
+    return node;
+}
+
+NODE* mul_factor_is_one(NODE* node)
+{
+    NodeData_t value = 0;
+
+    if (node->left->data != 1)
+    {
+        value = node->left->data;
+    }
+    else
+    {
+        value = node->right->data;
+    }
+
+    CUT_CHILDS(value);
+
+    return node;
+}
+
+NODE* add_term_is_zero(NODE* node)
+{
+    NodeData_t value = 0;
+
+    if (node->left->data != 0)
+    {
+        value = node->left->data;
+    }
+    else
+    {
+        value = node->right->data;
+    }
+
+    CUT_CHILDS(value);
+
+    return node;
+}
+
+NODE* add_two_terms(NODE* node)
+{
+    NodeData_t value = node->left->data + node->right->data;
+
+    CUT_CHILDS(value);
+
+    return node;
+}
+
+NODE* mul_two_factors(NODE* node)
+{
+    NodeData_t value = node->left->data * node->right->data;
+
+    CUT_CHILDS(value);
+
+    return node;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------
