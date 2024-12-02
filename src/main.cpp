@@ -1,4 +1,5 @@
 #include "diff_tree.h"
+#include "diff.h"
 
 int main()
 {
@@ -7,7 +8,7 @@ int main()
 
     // tree.root = new_node(OPERATION, DIV, NULL, NULL);
 
-    tree.root = DIV_(ADD_(MUL_(NUM_(7), X_), NUM_(3)), SUB_(NUM_(1000), NUM_(7)));
+    tree.root = DIV_(ADD_(MUL_(NUM_(7), X_), NUM_(3)), ADD_(NUM_(1000), NUM_(-7)));
 
     // prefix_print(stdout, tree.root);
     // printf("\n\n");
@@ -16,13 +17,21 @@ int main()
     // bad_tex_print(stdout, tree.root);
     // printf("\n\n");
 
-    // tree.root = get_g();
+    // tree.root = get_grammar();
     // NodeData_t result = tree.root->data;
 
+    // tree.root = get_grammar();
 
-    tree.root = get_g();
+    TREE diffTree = {};
 
-    tree_graphic_dump(&tree);
+    // diffTree = diff(&tree,
+
+    diffTree.root = differentiate(tree.root);
+
+    optimization(&diffTree);
+
+    tree_graphic_dump(&diffTree);
+    // tree_graphic_dump(&tree);
 
     return 0;
 }

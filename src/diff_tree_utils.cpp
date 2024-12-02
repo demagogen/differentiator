@@ -1,7 +1,7 @@
 #include "diff_tree_utils.h"
 
     #define DESCRIPTION_(_error)    \
-        case _error: return #_error \
+        case _error: return #_error
 
 const char* return_tree_error_enum_name_string(TREE_ERROR enum_param)
 {
@@ -90,6 +90,34 @@ const char* return_operation_enum(NodeData_t data)
 
         default:
             return "error print error";
+    }
+}
+
+OPERATIONS return_operation_code(NODE* node)
+{
+    if (node->type == OPERATION)
+    {
+        return (OPERATIONS) node->data;
+    }
+    else
+    {
+        return POISON;
+    }
+}
+
+COMPARE compare_values(NodeData_t value1, NodeData_t value2)
+{
+    if (value1 < value2)
+    {
+        return LESS;
+    }
+    else if (value1 > value2)
+    {
+        return MORE;
+    }
+    else
+    {
+        return EQUAL;
     }
 }
 

@@ -39,10 +39,12 @@ NODE* new_node(NODE_ELEMENT_TYPE type, NodeData_t data, NODE* left, NODE* right)
     if (right)
     {
         right->parent = newNode;
+        right->side   = RIGHT;
     }
     if (left)
     {
-        left->parent = newNode;
+        left->parent  = newNode;
+        left->side    = LEFT;
     }
 
     newNode->left  = left;
@@ -53,6 +55,26 @@ NODE* new_node(NODE_ELEMENT_TYPE type, NodeData_t data, NODE* left, NODE* right)
     return newNode;
 }
 
+NODE* copy_node(NODE* node)
+{
+    if (!node)
+    {
+        return NULL;
+    }
+
+    NODE* copyNode = new_node(node->type, node->data, node->left, node->right);
+
+    if (node->left)
+    {
+        copy_node(node->left);
+    }
+    if (node->right)
+    {
+        copy_node(node->right);
+    }
+
+    return copyNode;
+}
 
 TREE_ERROR tree_node_dtor(NODE* node)
 {
@@ -90,7 +112,7 @@ TREE_ERROR tree_node_dtor(NODE* node)
     else                                                  \
     {                                                     \
         return TREE_NODE_TYPE_ERROR;                      \
-    }                                                     \
+    }
 
 TREE_ERROR prefix_print(FILE* file, NODE* node)
 {
@@ -194,10 +216,11 @@ Here I think about how to make TeX like formula format
     return TREE_NONE;
 }
 
+//TODO TEST TEST TEST
 const char* s = "24*2+30*4+(23-21)*1000$";
 int         p = 0;
 
-NODE* get_g()
+NODE* get_grammar()
 {
     NODE* val = get_e();
 
@@ -208,8 +231,10 @@ NODE* get_g()
 
     return val;
 }
+//TODO читалка
+//TODO упрощалка
 
-NODE* get_n()
+NODE* get_number()
 {
     int val = 0;
 
@@ -291,7 +316,7 @@ NODE* get_p()
     }
     else
     {
-        return get_n();
+        return get_number();
     }
 
     return syntax_error();
@@ -426,8 +451,26 @@ void node_print_edge(FILE* dotfile, size_t first_node_index, size_t second_node_
     assert(dotfile);
     assert(node);
 
+    char edge_color[EdgeColorStringSize] = {};
+
+    switch (node->side)
+    {
+        case(LEFT):
+            strcpy(edge_color, "olivedrab1");
+            break;
+
+        case(RIGHT):
+            strcpy(edge_color, "orchid1");
+            break;
+
+        default:
+            strcpy(edge_color, "black");
+            break;
+    }
+
     fprintf(dotfile, "node%d->node%d "
-                     "[color = \"grey\"];\n ",
+                     "[color = \"%s\"];\n ",
                       first_node_index,
-                      second_node_index);
+                      second_node_index,
+                      edge_color);
 }

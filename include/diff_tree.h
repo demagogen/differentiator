@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "diff.h"
+#include "dsl.h"
 
 /* TODO think about tree_enum.h */
 
@@ -58,6 +58,7 @@ enum NODE_ELEMENT_TYPE
 
 enum OPERATIONS
 {
+    POISON = -1, /// <poison operation value
     ADD    =  1, /// <add two numbers in nodes
     SUB    =  2, /// <subtract right node number from left node number
     MUL    =  3, /// <multiply two numbers in nodes
@@ -87,7 +88,8 @@ typedef double NodeData_t; /// <node data type typedef
 
 /// @brief constants
 
-const size_t StartTreeCapacity = 0; /// <start tree capacity
+const size_t StartTreeCapacity   =  0; /// <start tree capacity
+const size_t EdgeColorStringSize = 11; /// <edge color string size
 
 /// @brief node structure
 
@@ -133,6 +135,18 @@ TREE_ERROR tree_dtor(TREE* tree);
 
 NODE* new_node(NODE_ELEMENT_TYPE type, NodeData_t data, NODE* left, NODE* right);
 
+/// @brief copy node
+/// @param node, which required to copy
+/// @return pointer on new node
+
+NODE* copy_node(NODE* node);
+
+/// @brief delete node by pointer
+/// @param pointer on required node
+/// @return tree error code
+
+TREE_ERROR tree_node_dtor(NODE* node);
+
 /// @brief recursive print tree in prefix format in file
 /// @param file pointer for output
 /// @param pointer on node structure
@@ -155,20 +169,14 @@ TREE_ERROR bad_tex_print(FILE* file, NODE* node);
 
 //___________________________________________________RECURSIVE COUNTER______________________________________________________
 
-NODE* get_n();
+NODE* get_number();
 NODE* get_p();
-NODE* get_g();
+NODE* get_grammar();
 NODE* get_e();
 NODE* get_t();
 NODE* syntax_error();
 
 //___________________________________________________TREE DUMP FUNCTIONS____________________________________________________
-
-/// @brief delete node by pointer
-/// @param pointer on required node
-/// @return tree error code
-
-TREE_ERROR tree_node_dtor(NODE* node);
 
 /// @brief make dotfile with tree graph
 /// @param pointer on tree structure
