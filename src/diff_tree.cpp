@@ -220,7 +220,7 @@ Here I think about how to make TeX like formula format
 const char* s = "24*2+30*4+(23-21)*1000$";
 int         p = 0;
 
-NODE* get_grammar()
+NODE* get_g()
 {
     NODE* val = get_e();
 
@@ -234,7 +234,7 @@ NODE* get_grammar()
 //TODO читалка
 //TODO упрощалка
 
-NODE* get_number()
+NODE* get_n()
 {
     int val = 0;
 
@@ -316,7 +316,7 @@ NODE* get_p()
     }
     else
     {
-        return get_number();
+        return get_n();
     }
 
     return syntax_error();

@@ -65,7 +65,6 @@ void optimization(TREE* tree)
     while (true)
     {
         bool indicator = true;
-
         recursive_constant_propagation(tree->root, &indicator);
 
         recursive_remove_trivials(tree->root, &indicator);
@@ -159,6 +158,11 @@ void recursive_constant_propagation(NODE* node, bool* indicator)
 void recursive_remove_trivials(NODE* node, bool* indicator)
 {
     if (!node || !node->right || !node->left)
+    {
+        return;
+    }
+
+    if (node->type != OPERATION || node->right->type != OBJECT || node->left->type != OBJECT)
     {
         return;
     }

@@ -169,9 +169,9 @@ TREE_ERROR bad_tex_print(FILE* file, NODE* node);
 
 //___________________________________________________RECURSIVE COUNTER______________________________________________________
 
-NODE* get_number();
+NODE* get_n();
 NODE* get_p();
-NODE* get_grammar();
+NODE* get_g();
 NODE* get_e();
 NODE* get_t();
 NODE* syntax_error();

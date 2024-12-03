@@ -8,19 +8,21 @@ int main()
 
     // tree.root = new_node(OPERATION, DIV, NULL, NULL);
 
-    tree.root = DIV_(ADD_(ADD_(X_, NUM_(20)), NUM_(3)), ADD_(NUM_(1000), NUM_(-7)));
+    tree.root = DIV_(ADD_(ADD_(MUL_(X_, X_), NUM_(20)), NUM_(3)), ADD_(NUM_(1000), NUM_(-7)));
+
+    //TODO situation, when we have node->right == X and node->left == X
 
     // prefix_print(stdout, tree.root);
     // printf("\n\n");
     // infix_print(stdout, tree.root);
-    // printf("\n\n");s
+    // printf("\n\n");
     // bad_tex_print(stdout, tree.root);
     // printf("\n\n");
 
-    // tree.root = get_grammar();
+    // tree.root = get_g();
     // NodeData_t result = tree.root->data;
 
-    // tree.root = get_grammar();
+    // tree.root = get_g();
 
     TREE diffTree = {};
 
