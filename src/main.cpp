@@ -1,63 +1,73 @@
-#include "diff_tree.h"
-#include "diff.h"
+#include "differentiator_tree.h"
+#include "differentiator.h"
+#include "compose_tex.h"
+#include "parse_formula.h"
 
-int main()
+int main (int argc, const char* argv[])
 {
+    // char input_formula[52] = {};
+    FILE* file = NULL;
+/*
+    if (argc == 1)
+    {
+        file = fopen("default_tex_dump.tex", "w+");
+
+        printf("Enter function:\n");
+
+        scanf("%s[^\n]", input_formula);
+        printf("my sentence %s\n", input_formula);
+    }
+    else if (argc == 2)
+    {
+        file = fopen(argv[1], "w+");
+
+        printf("Enter function:\n");
+
+        scanf("%s[^\n]", input_formula);
+    }
+*/
+
+    file = fopen ("dump.tex", "w+");
+    char input_formula[] = "(5 + 3) * 39 * x * cos(x* sin(x^2)) * ln(98)";
+
+/*
+    printf("Enter function:\n");
+    char input[30] = {};
+    scanf("%s", input);
+
+    FILE* input = stdin;
+
+    TEXT_DATA textData = {};
+    fill_text(input, &textData);
+
+*/
     TREE tree = {};
-    tree_ctor(&tree);
+    tree_ctor (&tree);
+    tree.latex_dump_file = file;
 
-    // tree.root = new_node(OPERATION, DIV, NULL, NULL);
+    TREE readTree = {};
+    tree_ctor (&readTree);
 
-    tree.root = DIV_(ADD_(ADD_(MUL_(X_, X_), NUM_(20)), NUM_(3)), ADD_(NUM_(1000), NUM_(-7)));
+    FORMULA formula = {};
+    formula.buffer   = input_formula;
+    formula.index   = 0;
 
-    //TODO situation, when we have node->right == X and node->left == X
+    read_formula (&tree, &formula);
 
-    // prefix_print(stdout, tree.root);
-    // printf("\n\n");
-    // infix_print(stdout, tree.root);
-    // printf("\n\n");
-    // bad_tex_print(stdout, tree.root);
-    // printf("\n\n");
-
-    // tree.root = get_g();
-    // NodeData_t result = tree.root->data;
-
-    // tree.root = get_g();
+    latex_dump (&tree, tree.root, TEX_START);
 
     TREE diffTree = {};
+    diffTree.latex_dump_file = tree.latex_dump_file;
+    tree_ctor (&diffTree);
 
-    // diffTree = diff(&tree,
+    dump_tree (&tree);
+    diffTree.root = differentiate (&tree, tree.root);
 
-    diffTree.root = differentiate(tree.root);
+    latex_dump (&diffTree, tree.root, TEX_ANSWER);
+    latex_dump (&tree, tree.root, TEX_END);
 
-    optimization(&diffTree);
-
-    tree_graphic_dump(&diffTree);
-    // tree_graphic_dump(&tree);
+    // dump_tree (&tree);
+    dump_tree (&diffTree);
 
     return 0;
 }
-
-/*
-    examples
-        root = new_node(OP, DIV, (new_node(OP, ADD, new_node(VAR, 1, NULL, NULL), new_node(NUM, 3, NULL, NULL)),
-                        new_node(OP, SUB, new_node(OBJECT, 1000, NULL, NULL), new_node(NUM, 7, NULL, NULL))));
-
-        root = DIV_(ADD_(X_, NUM_(3)), SUB_(NUM_(1000), NUM_(7)));
-
-    prefix
-        (/(+(x)(3))(-(1000)(7)))
-
-    infix
-        (((x) + (3)) / ((1000) - (7)))
-
-    We make new tree while taking derivative
-    diff(3) -> 0
-    diff(x) -> 1
-    diff(root) -> diff(root->right) and diff(root->left)
-    copy(subtree)
-*/
-
-    // tree.root = new_node(OPERATION, DIV, (new_node(OPERATION, ADD, new_node(VARIABLE, 1, NULL, NULL),
-                        // new_node(OBJECT, 3, NULL, NULL)), new_node(OPERATION, SUB, new_node(OBJECT, 1000, NULL, NULL),
-                        // new_node(OBJECT, 7, NULL, NULL))));

@@ -6,10 +6,17 @@ OBJECTS_DIR = build
 OUTFILE 	= differentiator
 
 # Source files
-SOURCES = main.cpp diff_tree.cpp diff_tree_utils.cpp diff.cpp compare_tex.cpp
+SOURCES = main.cpp differentiator_tree.cpp differentiator.cpp compose_tex.cpp differentiator_utils.cpp parse_formula.cpp
 
 # Submodule object files
-SUBMODULE_OBJECT_FILES =
+SUBMODULE_OBJECT_FILES = # lib/kalatushkin/build/text_data.o     \
+       					 # lib/kalatushkin/build/color_scheme.o  \
+       					 # lib/kalatushkin/build/flags.o          \
+       					 # lib/kalatushkin/build/sort_text.o     \
+       					 # lib/kalatushkin/build/utils.o         \
+       					 # lib/kalatushkin/build/parsing_flags.o
+
+SUBMODULE_NAME = # kalatushkin
 
 # Escape sequences (colors for terminal output)
 BOLD_RED 	  = \033[1;31m
@@ -39,10 +46,10 @@ CFLAGS= -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop
 		undefined,unreachable,vla-bound,vptr
 
 # Includes
-INCLUDE = -I include
+INCLUDE = -I include -I lib/kalatushkin/include
 
 # Libs
-LIBS =
+LIBS = -L lib/kalatushkin/build -l kalatushkin
 
 # Add .o in source files
 OBJECT_FILES = $(addsuffix .o,$(basename $(SOURCES)))

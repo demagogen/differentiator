@@ -18,6 +18,13 @@
         "system_error": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
-        "utility": "cpp"
-    }
+        "utility": "cpp",
+        "variant": "cpp",
+        "random": "cpp"
+    },
+    "editor.fontWeight": "550",
+    "editor.rulers": [
+
+    ],
+    "editor.fontFamily": "'Monaco', 'monospace', monospace"
 }

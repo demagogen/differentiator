@@ -1,85 +1,190 @@
 digraph {bgcolor="#696969" rankdir = TB
 Info[shape=Mrecord, style=filled, fillcolor="grey", label="capacity: 0", fontcolor = "black", fontsize = 14];
 
- node0[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072e70 | type:   0 | parent: (nil) | left:   0x5935c6072e30 | right:  0x5935c60726f0 | data: /}"];
+ node0[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c35c0 | type:   0 | parent: (nil) | left:   0x5bfe742c3580 | right:  0x5bfe742c2800 | data: +}"];
 
 node0->node1 [color = "olivedrab1"];
- node1[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072e30 | type:   2 | parent: 0x5935c6072e70 | left:   0x5935c6072df0 | right:  0x5935c6072a30 | data: +}"];
+ node1[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3580 | type:   2 | parent: 0x5bfe742c35c0 | left:   0x5bfe742c3540 | right:  0x5bfe742c2840 | data: *}"];
 
 node1->node2 [color = "olivedrab1"];
- node2[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072df0 | type:   2 | parent: 0x5935c6072e30 | left:   0x5935c6072db0 | right:  0x5935c6072a70 | data: *}"];
+ node2[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3540 | type:   2 | parent: 0x5bfe742c3580 | left:   0x5bfe742c3500 | right:  0x5bfe742c3140 | data: +}"];
 
 node2->node3 [color = "olivedrab1"];
- node3[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072db0 | type:   2 | parent: 0x5935c6072df0 | left:   0x5935c6072d70 | right:  0x5935c6072b30 | data: +}"];
+ node3[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3500 | type:   2 | parent: 0x5bfe742c3540 | left:   0x5bfe742c34c0 | right:  0x5bfe742c3180 | data: *}"];
 
 node3->node4 [color = "olivedrab1"];
- node4[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072d70 | type:   2 | parent: 0x5935c6072db0 | left:   0x5935c6072d30 | right:  0x5935c6072b70 | data: +}"];
+ node4[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c34c0 | type:   2 | parent: 0x5bfe742c3500 | left:   0x5bfe742c3480 | right:  0x5bfe742c33c0 | data: +}"];
 
 node4->node5 [color = "olivedrab1"];
- node5[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072d30 | type:   2 | parent: 0x5935c6072d70 | left:   0x5935c6072cf0 | right:  0x5935c6072c30 | data: +}"];
+ node5[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3480 | type:   2 | parent: 0x5bfe742c34c0 | left:   0x5bfe742c3440 | right:  0x5bfe742c3400 | data: *}"];
 
 node5->node6 [color = "olivedrab1"];
- node6[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072cf0 | type:   2 | parent: 0x5935c6072d30 | left:   0x5935c6072cb0 | right:  0x5935c6072c70 | data: *}"];
+ node6[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c3440 | type:   2 | parent: 0x5bfe742c3480 | left:   (nil) | right:  (nil) | data: 0.000000}"];
 
-node6->node7 [color = "olivedrab1"];
- node7[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072cb0 | type:   2 | parent: 0x5935c6072cf0 | left:   (nil) | right:  (nil) | data: 1.000000}"];
+node5->node7 [color = "orchid1"];
+ node7[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c3400 | type:   1 | parent: 0x5bfe742c3480 | left:   (nil) | right:  (nil) | data: x}"];
 
-node6->node8 [color = "orchid1"];
- node8[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5935c6072c70 | type:   1 | parent: 0x5935c6072cf0 | left:   (nil) | right:  (nil) | data: x}"];
+node4->node8 [color = "orchid1"];
+ node8[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c33c0 | type:   1 | parent: 0x5bfe742c34c0 | left:   (nil) | right:  (nil) | data: 312.000000}"];
 
-node5->node9 [color = "orchid1"];
- node9[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072c30 | type:   1 | parent: 0x5935c6072d30 | left:   0x5935c6072bf0 | right:  0x5935c6072bb0 | data: *}"];
+node3->node9 [color = "orchid1"];
+ node9[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3180 | type:   1 | parent: 0x5bfe742c3500 | left:   0x5bfe742c1090 | right:  (nil) | data: cos}"];
 
 node9->node10 [color = "olivedrab1"];
- node10[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072bf0 | type:   2 | parent: 0x5935c6072c30 | left:   (nil) | right:  (nil) | data: 1.000000}"];
+ node10[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1090 | type:   2 | parent: 0x5bfe742c3180 | left:   0x5bfe742c0f50 | right:  0x5bfe742c1050 | data: *}"];
 
-node9->node11 [color = "orchid1"];
- node11[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5935c6072bb0 | type:   1 | parent: 0x5935c6072c30 | left:   (nil) | right:  (nil) | data: x}"];
+node10->node11 [color = "olivedrab1"];
+ node11[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f50 | type:   2 | parent: 0x5bfe742c31c0 | left:   (nil) | right:  (nil) | data: x}"];
 
-node4->node12 [color = "orchid1"];
- node12[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072b70 | type:   1 | parent: 0x5935c6072d70 | left:   (nil) | right:  (nil) | data: 0.000000}"];
+node10->node12 [color = "orchid1"];
+ node12[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1050 | type:   1 | parent: 0x5bfe742c31c0 | left:   0x5bfe742c1010 | right:  (nil) | data: sin}"];
 
-node3->node13 [color = "orchid1"];
- node13[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072b30 | type:   1 | parent: 0x5935c6072db0 | left:   (nil) | right:  (nil) | data: 0.000000}"];
+node12->node13 [color = "olivedrab1"];
+ node13[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1010 | type:   2 | parent: 0x5bfe742c3240 | left:   0x5bfe742c0f90 | right:  0x5bfe742c0fd0 | data: ^}"];
 
-node2->node14 [color = "orchid1"];
- node14[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072a70 | type:   1 | parent: 0x5935c6072df0 | left:   (nil) | right:  (nil) | data: 993.000000}"];
+node13->node14 [color = "olivedrab1"];
+ node14[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f90 | type:   2 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: x}"];
 
-node1->node15 [color = "orchid1"];
- node15[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072a30 | type:   1 | parent: 0x5935c6072e30 | left:   0x5935c60729f0 | right:  0x5935c60729b0 | data: *}"];
+node13->node15 [color = "orchid1"];
+ node15[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0fd0 | type:   1 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: 2.000000}"];
 
-node15->node16 [color = "olivedrab1"];
- node16[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c60729f0 | type:   2 | parent: 0x5935c6072a30 | left:   (nil) | right:  (nil) | data: -1.000000}"];
+node2->node16 [color = "orchid1"];
+ node16[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3140 | type:   1 | parent: 0x5bfe742c3540 | left:   0x5bfe742c3100 | right:  0x5bfe742c28c0 | data: *}"];
 
-node15->node17 [color = "orchid1"];
- node17[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c60729b0 | type:   1 | parent: 0x5935c6072a30 | left:   0x5935c6072970 | right:  0x5935c6072730 | data: *}"];
+node16->node17 [color = "olivedrab1"];
+ node17[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3100 | type:   2 | parent: 0x5bfe742c3140 | left:   0x5bfe742c30c0 | right:  0x5bfe742c3080 | data: *}"];
 
 node17->node18 [color = "olivedrab1"];
- node18[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072970 | type:   2 | parent: 0x5935c60729b0 | left:   (nil) | right:  (nil) | data: 0.000000}"];
+ node18[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c30c0 | type:   2 | parent: 0x5bfe742c3100 | left:   (nil) | right:  (nil) | data: -1.000000}"];
 
 node17->node19 [color = "orchid1"];
- node19[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072730 | type:   1 | parent: 0x5935c60729b0 | left:   0x5935c60724b0 | right:  0x5935c6072370 | data: +}"];
+ node19[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3080 | type:   1 | parent: 0x5bfe742c3100 | left:   0x5bfe742c3040 | right:  0x5bfe742c2e80 | data: *}"];
 
 node19->node20 [color = "olivedrab1"];
- node20[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c60724b0 | type:   2 | parent: 0x5935c6072730 | left:   0x5935c6072470 | right:  0x5935c60723b0 | data: +}"];
+ node20[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c3040 | type:   2 | parent: 0x5bfe742c3080 | left:   0x5bfe742c2ec0 | right:  (nil) | data: sin}"];
 
 node20->node21 [color = "olivedrab1"];
- node21[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5935c6072470 | type:   2 | parent: 0x5935c6072770 | left:   0x5935c6072430 | right:  0x5935c60723f0 | data: *}"];
+ node21[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2ec0 | type:   2 | parent: 0x5bfe742c3040 | left:   0x5bfe742c0f50 | right:  0x5bfe742c1050 | data: *}"];
 
 node21->node22 [color = "olivedrab1"];
- node22[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5935c6072430 | type:   2 | parent: 0x5935c60727b0 | left:   (nil) | right:  (nil) | data: x}"];
+ node22[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f50 | type:   2 | parent: 0x5bfe742c31c0 | left:   (nil) | right:  (nil) | data: x}"];
 
 node21->node23 [color = "orchid1"];
- node23[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5935c60723f0 | type:   1 | parent: 0x5935c60727b0 | left:   (nil) | right:  (nil) | data: x}"];
+ node23[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1050 | type:   1 | parent: 0x5bfe742c31c0 | left:   0x5bfe742c1010 | right:  (nil) | data: sin}"];
 
-node20->node24 [color = "orchid1"];
- node24[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c60723b0 | type:   1 | parent: 0x5935c6072770 | left:   (nil) | right:  (nil) | data: 20.000000}"];
+node23->node24 [color = "olivedrab1"];
+ node24[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1010 | type:   2 | parent: 0x5bfe742c3240 | left:   0x5bfe742c0f90 | right:  0x5bfe742c0fd0 | data: ^}"];
 
-node19->node25 [color = "orchid1"];
- node25[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c6072370 | type:   1 | parent: 0x5935c6072730 | left:   (nil) | right:  (nil) | data: 3.000000}"];
+node24->node25 [color = "olivedrab1"];
+ node25[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f90 | type:   2 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: x}"];
 
-node0->node26 [color = "orchid1"];
- node26[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5935c60726f0 | type:   1 | parent: 0x5935c6072e70 | left:   (nil) | right:  (nil) | data: 986049.000000}"];
+node24->node26 [color = "orchid1"];
+ node26[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0fd0 | type:   1 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: 2.000000}"];
+
+node19->node27 [color = "orchid1"];
+ node27[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2e80 | type:   1 | parent: 0x5bfe742c3080 | left:   0x5bfe742c2d00 | right:  0x5bfe742c2cc0 | data: +}"];
+
+node27->node28 [color = "orchid1"];
+ node28[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2d00 | type:   1 | parent: 0x5bfe742c2e40 | left:   0x5bfe742c1010 | right:  (nil) | data: sin}"];
+
+node28->node29 [color = "olivedrab1"];
+ node29[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1010 | type:   2 | parent: 0x5bfe742c3240 | left:   0x5bfe742c0f90 | right:  0x5bfe742c0fd0 | data: ^}"];
+
+node29->node30 [color = "olivedrab1"];
+ node30[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f90 | type:   2 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: x}"];
+
+node29->node31 [color = "orchid1"];
+ node31[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0fd0 | type:   1 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: 2.000000}"];
+
+node27->node32 [color = "orchid1"];
+ node32[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2cc0 | type:   1 | parent: 0x5bfe742c2e80 | left:   0x5bfe742c2c80 | right:  0x5bfe742c2980 | data: *}"];
+
+node32->node33 [color = "olivedrab1"];
+ node33[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2c80 | type:   2 | parent: 0x5bfe742c2cc0 | left:   0x5bfe742c2c40 | right:  0x5bfe742c2b00 | data: *}"];
+
+node33->node34 [color = "olivedrab1"];
+ node34[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2c40 | type:   2 | parent: 0x5bfe742c2c80 | left:   0x5bfe742c2b80 | right:  (nil) | data: cos}"];
+
+node34->node35 [color = "olivedrab1"];
+ node35[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2b80 | type:   2 | parent: 0x5bfe742c2c40 | left:   0x5bfe742c0f90 | right:  0x5bfe742c0fd0 | data: ^}"];
+
+node35->node36 [color = "olivedrab1"];
+ node36[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f90 | type:   2 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: x}"];
+
+node35->node37 [color = "orchid1"];
+ node37[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0fd0 | type:   1 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: 2.000000}"];
+
+node33->node38 [color = "olivedrab1"];
+ node38[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2b00 | type:   2 | parent: 0x5bfe742c2b40 | left:   0x5bfe742c2ac0 | right:  0x5bfe742c2a80 | data: *}"];
+
+node38->node39 [color = "olivedrab1"];
+ node39[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c2ac0 | type:   2 | parent: 0x5bfe742c2b00 | left:   (nil) | right:  (nil) | data: 2.000000}"];
+
+node38->node40 [color = "orchid1"];
+ node40[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2a80 | type:   1 | parent: 0x5bfe742c2b00 | left:   0x5bfe742c2a40 | right:  0x5bfe742c2a00 | data: ^}"];
+
+node40->node41 [color = "olivedrab1"];
+ node41[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c2a40 | type:   2 | parent: 0x5bfe742c2a80 | left:   (nil) | right:  (nil) | data: x}"];
+
+node40->node42 [color = "orchid1"];
+ node42[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c2a00 | type:   1 | parent: 0x5bfe742c2a80 | left:   (nil) | right:  (nil) | data: 1.000000}"];
+
+node32->node43 [color = "orchid1"];
+ node43[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c2980 | type:   1 | parent: 0x5bfe742c2cc0 | left:   (nil) | right:  (nil) | data: x}"];
+
+node16->node44 [color = "orchid1"];
+ node44[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c28c0 | type:   1 | parent: 0x5bfe742c3140 | left:   0x5bfe742c0e90 | right:  0x5bfe742c0ed0 | data: *}"];
+
+node44->node45 [color = "olivedrab1"];
+ node45[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0e90 | type:   2 | parent: 0x5bfe742c28c0 | left:   (nil) | right:  (nil) | data: 312.000000}"];
+
+node44->node46 [color = "orchid1"];
+ node46[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0ed0 | type:   1 | parent: 0x5bfe742c28c0 | left:   (nil) | right:  (nil) | data: x}"];
+
+node1->node47 [color = "orchid1"];
+ node47[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2840 | type:   1 | parent: 0x5bfe742c3580 | left:   0x5bfe742c1150 | right:  (nil) | data: ln}"];
+
+node47->node48 [color = "olivedrab1"];
+ node48[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c1150 | type:   2 | parent: 0x5bfe742c2840 | left:   (nil) | right:  (nil) | data: 98.000000}"];
+
+node0->node49 [color = "orchid1"];
+ node49[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2800 | type:   1 | parent: 0x5bfe742c35c0 | left:   0x5bfe742c27c0 | right:  0x5bfe742c2400 | data: *}"];
+
+node49->node50 [color = "olivedrab1"];
+ node50[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c27c0 | type:   2 | parent: 0x5bfe742c2800 | left:   (nil) | right:  (nil) | data: 0.000000}"];
+
+node49->node51 [color = "orchid1"];
+ node51[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c2400 | type:   1 | parent: 0x5bfe742c2800 | left:   0x5bfe742c0f10 | right:  0x5bfe742c10d0 | data: *}"];
+
+node51->node52 [color = "olivedrab1"];
+ node52[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c0f10 | type:   2 | parent: 0x5bfe742c2400 | left:   0x5bfe742c0e90 | right:  0x5bfe742c0ed0 | data: *}"];
+
+node52->node53 [color = "olivedrab1"];
+ node53[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0e90 | type:   2 | parent: 0x5bfe742c28c0 | left:   (nil) | right:  (nil) | data: 312.000000}"];
+
+node52->node54 [color = "orchid1"];
+ node54[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0ed0 | type:   1 | parent: 0x5bfe742c28c0 | left:   (nil) | right:  (nil) | data: x}"];
+
+node51->node55 [color = "orchid1"];
+ node55[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c10d0 | type:   1 | parent: 0x5bfe742c2400 | left:   0x5bfe742c1090 | right:  (nil) | data: cos}"];
+
+node55->node56 [color = "olivedrab1"];
+ node56[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1090 | type:   2 | parent: 0x5bfe742c3180 | left:   0x5bfe742c0f50 | right:  0x5bfe742c1050 | data: *}"];
+
+node56->node57 [color = "olivedrab1"];
+ node57[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f50 | type:   2 | parent: 0x5bfe742c31c0 | left:   (nil) | right:  (nil) | data: x}"];
+
+node56->node58 [color = "orchid1"];
+ node58[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1050 | type:   1 | parent: 0x5bfe742c31c0 | left:   0x5bfe742c1010 | right:  (nil) | data: sin}"];
+
+node58->node59 [color = "olivedrab1"];
+ node59[shape=Mrecord, style=filled, fillcolor="deepskyblue", label=" {address: 0x5bfe742c1010 | type:   2 | parent: 0x5bfe742c3240 | left:   0x5bfe742c0f90 | right:  0x5bfe742c0fd0 | data: ^}"];
+
+node59->node60 [color = "olivedrab1"];
+ node60[shape=Mrecord, style=filled, fillcolor="grey", label=" {address: 0x5bfe742c0f90 | type:   2 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: x}"];
+
+node59->node61 [color = "orchid1"];
+ node61[shape=Mrecord, style=filled, fillcolor="firebrick1", label=" {address: 0x5bfe742c0fd0 | type:   1 | parent: 0x5bfe742c3280 | left:   (nil) | right:  (nil) | data: 2.000000}"];
 
 
 }
